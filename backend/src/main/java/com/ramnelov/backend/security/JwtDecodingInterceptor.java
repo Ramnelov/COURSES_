@@ -4,9 +4,6 @@ import com.ramnelov.backend.service.TokenService;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 public class JwtDecodingInterceptor implements HandlerInterceptor {
 
     private final TokenService tokenService;

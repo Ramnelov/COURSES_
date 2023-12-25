@@ -2,11 +2,10 @@ package com.ramnelov.backend.service;
 
 import com.ramnelov.backend.model.UserEntity;
 import com.ramnelov.backend.repository.UserRepository;
+import org.apache.commons.validator.routines.RegexValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import org.apache.commons.validator.routines.RegexValidator;
 
 import java.util.Optional;
 

@@ -3,10 +3,8 @@ package com.ramnelov.backend.model;
 import com.ramnelov.backend.dto.UserDTO;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -21,9 +19,6 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<CourseEntity> courses;
 
     private String username;
     private String password;

@@ -7,9 +7,14 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import com.ramnelov.backend.service.UserDetailsServiceImpl;
+import io.github.bucket4j.Bandwidth;
+import io.github.bucket4j.Bucket;
+import io.github.bucket4j.Bucket4j;
+import io.github.bucket4j.Refill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -32,6 +37,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.time.Duration;
 import java.util.List;
 
 @Configuration
@@ -59,12 +65,7 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        /*return new InMemoryUserDetailsManager(
-                User.withUsername("ramnelov")
-                        .password(passwordEncoder().encode("password"))
-                        .authorities("ADMIN")
-                        .build()
-        );*/
+
        return userDetailsService;
 
     }
@@ -77,13 +78,21 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/users/token").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/users/").permitAll()
                         .anyRequest().authenticated()
-                )
 
+                )
 
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .build();
+    }
+
+    @Bean
+    public Bucket bucket() {
+        return Bucket4j.builder()
+            .addLimit(Bandwidth.classic(10, Refill.greedy(10, Duration.ofMinutes(1))))
+            .build();
     }
 
     @Bean

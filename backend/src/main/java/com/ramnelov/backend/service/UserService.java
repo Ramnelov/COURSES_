@@ -1,12 +1,15 @@
 package com.ramnelov.backend.service;
 
+import com.ramnelov.backend.exception.UserNotFoundException;
 import com.ramnelov.backend.model.UserEntity;
 import com.ramnelov.backend.repository.UserRepository;
 import org.apache.commons.validator.routines.RegexValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.ramnelov.backend.utils.Role;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,12 +21,33 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    public List<UserEntity> getAllUsers() {
+        return userRepository.findAll();
+    }
 
     public UserEntity getUserByUsername(String username) {
-        // Fetch user from the database
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        return userRepository.findByUsernameIgnoreCase(username)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
 
+    }
+
+    public UserEntity getUserByEmail(String email) {
+        return userRepository.findByEmailIgnoreCase(email)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+
+    }
+
+    public boolean userExistsByUsername(String username) {
+        return userRepository.existsByUsernameIgnoreCase(username);
+    }
+
+
+    public boolean userExistById(Long id) {
+        return userRepository.existsById(id);
+    }
+
+    public boolean userExistsByEmail(String email) {
+        return userRepository.existsByEmailIgnoreCase(email);
     }
 
     public Optional<UserEntity> getUserById(Long userId) {
@@ -33,19 +57,24 @@ public class UserService {
 
     public UserEntity createUser(UserEntity user) {
 
-
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(encodePassword(user.getPassword()));
 
         return userRepository.save(user);
     }
 
-    public void updateUser(UserEntity user) {
+    public UserEntity updateUser(UserEntity user) {
 
+        user.setPassword(encodePassword(user.getPassword()));
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
+    }
 
+    public String encodePassword(String password){
+        return passwordEncoder.encode(password);
+    }
 
-        userRepository.save(user);
+    public void deleteUser(Long userId) {
+        userRepository.deleteById(userId);
     }
 
 
@@ -55,6 +84,25 @@ public class UserService {
         return validator.isValid(password);
     }
 
+    public boolean isValidEmail(String email) {
+        String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+        RegexValidator validator = new RegexValidator(regex);
+        return validator.isValid(email);
+    }
 
+    public boolean isValidUsername(String username) {
+        String regex = "^[A-Za-z0-9]{3,20}$";
+        RegexValidator validator = new RegexValidator(regex);
+        return validator.isValid(username);
+    }
+
+    public boolean isValidRole(String role) {
+        for (Role r : Role.values()) {
+            if (r.name().equals(role)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

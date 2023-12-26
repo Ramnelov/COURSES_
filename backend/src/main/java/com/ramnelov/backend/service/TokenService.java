@@ -32,11 +32,11 @@ public class TokenService {
         return decodeToken(token);
     }
 
-    public String tokenUsername(Jwt token) {
+    public String getUsername(Jwt token) {
         return token.getClaim("sub");
     }
 
-    public String tokenAuthority(Jwt token) {
+    public String getAuthority(Jwt token) {
         return token.getClaim("scope");
     }
 

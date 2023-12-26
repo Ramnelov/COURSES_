@@ -1,4 +1,4 @@
-package com.ramnelov.backend.unit.entity;
+package com.ramnelov.backend.entity;
 
 import com.ramnelov.backend.dto.UserDTO;
 import com.ramnelov.backend.model.UserEntity;

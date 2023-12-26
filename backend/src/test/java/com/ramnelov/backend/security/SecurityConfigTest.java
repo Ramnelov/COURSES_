@@ -1,4 +1,4 @@
-package com.ramnelov.backend.unit.security;
+package com.ramnelov.backend.security;
 
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.jwk.JWK;

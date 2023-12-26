@@ -1,4 +1,4 @@
-package com.ramnelov.backend.unit.service;
+package com.ramnelov.backend.service;
 
 import com.ramnelov.backend.model.UserEntity;
 import com.ramnelov.backend.repository.UserRepository;

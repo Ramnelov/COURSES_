@@ -1,4 +1,4 @@
-package com.ramnelov.backend.unit.utils;
+package com.ramnelov.backend.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ramnelov.backend.model.UserEntity;

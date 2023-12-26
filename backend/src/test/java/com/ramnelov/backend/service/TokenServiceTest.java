@@ -1,4 +1,4 @@
-package com.ramnelov.backend.unit.service;
+package com.ramnelov.backend.service;
 
 import com.ramnelov.backend.service.TokenService;
 import org.junit.jupiter.api.Test;

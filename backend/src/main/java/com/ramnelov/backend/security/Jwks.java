@@ -1,9 +1,7 @@
 package com.ramnelov.backend.security;
 
 import com.nimbusds.jose.jwk.RSAKey;
-import com.ramnelov.backend.controller.UserController;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 import java.security.KeyPair;
 import java.security.interfaces.RSAPrivateKey;

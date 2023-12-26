@@ -1,4 +1,4 @@
-package com.ramnelov.backend.unit.security;
+package com.ramnelov.backend.security;
 
 import com.ramnelov.backend.security.KeyGeneratorUtils;
 import org.junit.jupiter.api.Test;

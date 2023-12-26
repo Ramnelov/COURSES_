@@ -1,4 +1,4 @@
-package com.ramnelov.backend.unit.security;
+package com.ramnelov.backend.security;
 
 import com.ramnelov.backend.security.JwtDecodingInterceptor;
 import com.ramnelov.backend.security.WebConfig;

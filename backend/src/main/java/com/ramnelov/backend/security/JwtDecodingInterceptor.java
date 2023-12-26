@@ -29,4 +29,9 @@ public class JwtDecodingInterceptor implements HandlerInterceptor {
 
         return true;
     }
+
+    public TokenService getTokenService() {
+
+        return tokenService;
+    }
 }

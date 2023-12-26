@@ -1,4 +1,4 @@
-package com.ramnelov.backend.unit.controller;
+package com.ramnelov.backend.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

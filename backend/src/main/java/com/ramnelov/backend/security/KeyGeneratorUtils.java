@@ -7,7 +7,7 @@ import java.security.KeyPairGenerator;
 
 
 @Component
-final class KeyGeneratorUtils {
+public final class KeyGeneratorUtils {
 
     private KeyGeneratorUtils() {}
 

@@ -151,33 +151,6 @@ public class UserController {
         }
     }
 
-    @PostMapping("/token/verify")
-    public ResponseEntity<String> verifyToken(@RequestAttribute("jwt") Jwt jwt) {
-        try {
-            tokenService.getAuthority(jwt);
-            return ResponseEntity.ok("Token is valid");
-        } catch (AuthenticationException e) {
-            logger.error("Invalid token: " + jwt.getTokenValue());
-            return ResponseEntity.status(400).body("Invalid token");
-        }
-    }
-
-    @PostMapping("/admin/token/verify")
-    public ResponseEntity<String> verifyTokenAdmin(@RequestAttribute("jwt") Jwt jwt) {
-        try {
-            String authority = tokenService.getAuthority(jwt);
-            if (!authority.equals(Role.ADMIN.name())) {
-                logger.error("Invalid token: " + jwt.getTokenValue());
-                return ResponseEntity.status(400).body("Invalid token");
-            }
-            return ResponseEntity.ok("Token is valid");
-        } catch (AuthenticationException e) {
-            logger.error("Invalid token: " + jwt.getTokenValue());
-            return ResponseEntity.status(400).body("Invalid token");
-        }
-    }
-
-    
 
     @PutMapping("admin/{id}")
     public ResponseEntity<String> updateUserAdmin(@PathVariable Long id, @RequestBody UserDTO userDTO, @RequestAttribute("jwt") Jwt jwt) {

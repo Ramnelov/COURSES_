@@ -1,19 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getToken } from '../services/api';
+import { AuthContext } from '../context/AuthContext';
 
 
 function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const { setLoggedIn } = useContext(AuthContext);
+
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
       const token = await getToken(username, password);
-      console.log(token); // Handle the token as needed
+      if (token) {
+        localStorage.setItem('token', token); 
+        setLoggedIn(true);
+      }
     } catch (error) {
-      console.error(error); // Handle the error as needed
+      console.error(error);
     }
   };
 

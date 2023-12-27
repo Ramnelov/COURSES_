@@ -1,5 +1,11 @@
 // src/services/api.ts
 
+export interface User {
+  username: string;
+  role: string;
+  email: string;
+}
+
 export async function getToken(username: string, password: string): Promise<string> {
   const response = await fetch('http://localhost:8443/api/users/token', {
     method: 'POST',

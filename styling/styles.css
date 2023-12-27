@@ -1,0 +1,154 @@
+/*Entire body*/
+/*body  {
+  background-image: linear-gradient(to bottom right, skyblue, rgb(200, 197, 197));
+  
+  color: white;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}*/
+
+body  {
+    background-image: linear-gradient(to bottom right, skyblue, rgb(200, 197, 197));
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+  
+  
+  
+  .change-content {
+    transition: opacity 0.3s ease-out;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+  }
+  
+  .change-content.visible {
+    opacity: 1;
+    height: auto;
+  }
+  
+  /*Removing scrollbar*/
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /*Image*/
+  .crop-img {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: border-radius 0.2s;
+  }
+  
+  .crop-img:hover {
+    border-radius: 0%;
+  }
+  
+  .rounded-button {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 20px;
+    padding: 10px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: 2px;
+    margin-bottom: 5px;
+  }
+  
+  .rounded-button:hover {
+    background-color: white;
+    color: skyblue; /* Adjust the alpha value (0 to 1) to control transparency */
+  }
+  
+  .button-line {
+    margin-bottom: 6px;
+  }
+  
+  /*Name and title*/
+  .name {
+    margin: 5px 0 5px 0;
+  }
+  
+  .name-under {
+    margin: 0 0 1em 0;
+    max-width: 500px;
+  }
+  
+  /*Social icon*/
+  .social-icon {
+    transition: color, font-size 0.2s;
+    text-decoration: none;
+    margin: 0 3px;
+    font-size: 3em;
+    color: white;
+    
+  }
+  
+  .link {
+    transition: color 0.2s;
+    color: white;
+    text-decoration: underline;
+  
+  }
+  
+  .link:hover {
+    color: whitesmoke;
+    text-decoration: none;
+  }
+  
+  .social-icon:hover {
+    color: whitesmoke;
+    font-size: 3.5em;
+  }
+  
+  .social-icon-line {
+    line-height: 4.6em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /*Experiences*/
+  .experience {
+    margin: 0 0 16px 0;
+  }
+  
+  .experience-top {
+    margin: 0 0 2px 0;
+  }
+  
+  .experience-name {
+    margin: 0 0 2px 0;
+  }
+  
+  .experience-under {
+    margin: 5px 0 0 0;
+  }
+  
+  .experience-date {
+    margin: 0 0 0 0;
+    font-size: 14px;
+  }
+  
+  .experience-rubric {
+    margin: 0 0 2px 0;
+  }
+  
+  .experience-para {
+    margin-bottom: 16px;
+    margin-top: 4px;
+    font-size: 13px;
+    max-width: 500px;
+  }

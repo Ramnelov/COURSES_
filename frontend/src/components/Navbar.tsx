@@ -3,8 +3,14 @@ import React, { useContext } from 'react';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { NotificationContext } from '../context/NotificationContext';
+
 
 const NavigationBar: React.FC = () => {
+
+  const { setNotification } = useContext(NotificationContext);
+
+
   const { loggedIn, setLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -12,6 +18,7 @@ const NavigationBar: React.FC = () => {
     setLoggedIn(false);
     localStorage.removeItem('loggedIn'); // Remove the loggedIn status from local storage
     localStorage.removeItem('token'); // Remove the token from local storage
+    setNotification('', 'info')
   };
 
   const handleLoginRedirect = () => {
@@ -20,15 +27,14 @@ const NavigationBar: React.FC = () => {
 
   return (
     <Navbar bg="dark" variant="dark">
-      <Link to="/" className="navbar-brand">User application</Link>
       <Nav className="mr-auto">
-        <NavLink className="nav-link" to="/" end>Home</NavLink>
+        <NavLink className="nav-link" to="/" end>User application</NavLink>
       </Nav>
       <Navbar.Collapse className="justify-content-end">
-        {loggedIn ? (
-          <Button variant="outline-info" onClick={handleLogout}>Log Out</Button>
+          {loggedIn ? (
+          <Button variant="outline-light" onClick={handleLogout} style={{ marginRight: '5px' }}>Log Out</Button>
         ) : (
-          <Button variant="outline-info" onClick={handleLoginRedirect}>Log In</Button>
+          <Button variant="outline-light" onClick={handleLoginRedirect} style={{ marginRight: '5px' }}>Log In</Button>
         )}
       </Navbar.Collapse>
     </Navbar>

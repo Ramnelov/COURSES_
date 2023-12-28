@@ -1,7 +1,29 @@
-$primary-color: #5a667e;
+$primary-color: #fafafa;
 
 .App {
   text-align: center;
+  
+  
+}
+
+.header {
+  position: relative;
+}
+
+.notification-wrapper {
+  position: absolute;
+  top: 57px; // Increase this value to lower the notification
+  width: 100%;
+  z-index: 1; // This makes sure the notification appears above other elements
+}
+
+.main-content {
+  background-color: $primary-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 100px); // Adjust this value based on the height of your Navbar
+  flex-direction: column;
 }
 
 .App-logo {

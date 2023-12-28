@@ -12,11 +12,13 @@ function CreateUserForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const { setLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [usernameTouched, setUsernameTouched] = useState(false);
+  const [emailTouched, setEmailTouched] = useState(false);
+  const [passwordTouched, setPasswordTouched] = useState(false);
 
   function validateEmail(email: string) {
-    var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    var re = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; ;
     return re.test(email);
   }
 
@@ -50,19 +52,37 @@ function CreateUserForm() {
     <div className="container">
       <div className="row justify-content-center">
         <div className="col-3">
-          <form onSubmit={handleSubmit} className="mt-5">
-            <div className="form-group">
-              <label>Username:</label>
-              <input type="text" className="form-control" value={username} onChange={e => setUsername(e.target.value)} />
-            </div>
-            <div className="form-group">
-              <label>Email:</label>
-              <input type="email" className="form-control" value={email} onChange={e => setEmail(e.target.value)} />
-            </div>
-            <div className="form-group">
-              <label>Password:</label>
-              <input type="password" className="form-control" value={password} onChange={e => setPassword(e.target.value)} />
-            </div>
+        <form onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label>Username:</label>
+        <input
+          type="text"
+          className={`form-control ${!validateUsername(username) && usernameTouched ? 'is-invalid' : ''}`}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          onFocus={() => setUsernameTouched(true)}
+        />
+      </div>
+      <div className="form-group">
+        <label>Email:</label>
+        <input
+          type="email"
+          className={`form-control ${!validateEmail(email) && emailTouched ? 'is-invalid' : ''}`}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          onFocus={() => setEmailTouched(true)}
+        />
+      </div>
+      <div className="form-group">
+        <label>Password:</label>
+        <input
+          type="password"
+          className={`form-control ${!validatePassword(password) && passwordTouched ? 'is-invalid' : ''}`}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          onFocus={() => setPasswordTouched(true)}
+        />
+      </div>
             {error && <div className="alert alert-danger mt-3">{error}</div>}
             <button type="submit" className="btn btn-primary mt-3" disabled={!validateUsername(username) || !validateEmail(email) || !validatePassword(password)}>Create Account</button>
           </form>

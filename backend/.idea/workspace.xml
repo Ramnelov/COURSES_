@@ -5,9 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="598582c2-2000-443d-ac38-77f71d9064aa" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ramnelov/backend/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ramnelov/backend/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/LoginForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/User.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/styles/App.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/styles/App.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +169,7 @@
       <workItem from="1703716882564" duration="60000" />
       <workItem from="1703717216044" duration="2033000" />
       <workItem from="1703719951673" duration="28000" />
-      <workItem from="1703780256837" duration="1351000" />
+      <workItem from="1703780256837" duration="4033000" />
     </task>
     <servers />
   </component>

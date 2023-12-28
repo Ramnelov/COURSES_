@@ -10,7 +10,16 @@ function UserComponent() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      getUser(token, setLoggedIn).then(data => setUser(data)).catch(error => console.error(error));
+      getUser(token)
+        .then(data => setUser(data))
+        .catch(error => {
+          console.error(error);
+          if (error.response && error.response.status === 401) {
+            setLoggedIn(false);
+            localStorage.removeItem('token');
+            localStorage.setItem('loggedIn', 'false');
+          }
+        });
     }
   }, []);
 

@@ -22,10 +22,10 @@ export async function getToken(username: string, password: string): Promise<stri
     throw response;
   }
 
-  return response.text(); // Return the response as a string
+  return response.text();
 }
 
-export async function getUser(token: string, setLoggedIn: (value: boolean) => void): Promise<any> {
+export async function getUser(token: string): Promise<any> {
   const response = await fetch('http://localhost:8443/api/users/', {
     method: 'GET',
     headers: {
@@ -34,17 +34,11 @@ export async function getUser(token: string, setLoggedIn: (value: boolean) => vo
     },
   });
 
-  if (response.status === 401) {
-    setLoggedIn(false);
-    localStorage.removeItem('loggedIn');
-    localStorage.removeItem('token');
-    // Redirect the user to the login page
-    window.location.href = '/login';
-  } else if (!response.ok) {
+   if (!response.ok) {
     throw response;
   }
 
-  return response.json(); // Assuming the response data is JSON
+  return response.json();
 }
 
 export async function createUser(username: string, password: string, email: string): Promise<any> {
@@ -57,8 +51,9 @@ export async function createUser(username: string, password: string, email: stri
   });
 
   if (!response.ok) {
-    throw response;
+    const errorText = await response.text();
+    throw new Error(errorText);
   }
 
-  return response.json(); // Assuming the response data is JSON
+  return response.text();
 }

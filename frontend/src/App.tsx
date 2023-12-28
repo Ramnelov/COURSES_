@@ -9,20 +9,25 @@ import { AuthContext } from './context/AuthContext';
 import LoginForm from './components/LoginForm';
 import CreateUserForm from './components/CreateUserForm';
 import TestComponent from './components/TestComponent';
+import { NotificationProvider } from './context/NotificationContext';
+import { Notification } from './components/Notification';
 
 
 function App() {
   const { loggedIn } = useContext(AuthContext);
 
   return (
-    <div className="App">
-      <NavigationBar /> 
-      <Routes>
-        <Route path="/" element={loggedIn ? <UserComponent /> : <LoginForm />} />
-        <Route path="/create" element={<CreateUserForm/>} />
-        <Route path="/test" element={<TestComponent/>} />
-      </Routes>
-    </div>
+    <NotificationProvider>
+      <div className="App">
+        <NavigationBar /> 
+        <Notification />
+        <Routes>
+          <Route path="/" element={loggedIn ? <UserComponent /> : <LoginForm />} />
+          <Route path="/create" element={<CreateUserForm/>} />
+          <Route path="/test" element={<TestComponent/>} />
+        </Routes>
+      </div>
+    </NotificationProvider>
   );
 }
 

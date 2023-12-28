@@ -117,7 +117,7 @@ public class UserController {
                     userService.createUser(user);
 
                     logger.info("Registration successful");
-                    return ResponseEntity.ok("Registration successful: " + user);
+                    return ResponseEntity.ok("Registration successful");
                 }
             } else {
                 logger.error("Unauthorized");

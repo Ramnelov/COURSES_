@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="598582c2-2000-443d-ac38-77f71d9064aa" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ramnelov/backend/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ramnelov/backend/security/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/LoginForm.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="598582c2-2000-443d-ac38-77f71d9064aa" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -167,6 +163,7 @@
       <workItem from="1703717216044" duration="2033000" />
       <workItem from="1703719951673" duration="28000" />
       <workItem from="1703780256837" duration="5720000" />
+      <workItem from="1703847372637" duration="673000" />
     </task>
     <servers />
   </component>

@@ -27,6 +27,7 @@ function LoginForm() {
       if (token) {
         localStorage.setItem('token', token); 
         localStorage.setItem('loggedIn', 'true');
+        localStorage.setItem('username', username);
         setLoggedIn(true);
         setNotification('', 'info');
         
@@ -55,7 +56,7 @@ function LoginForm() {
 
     <div className="container">
       <div className="row justify-content-center">
-        <div className="col-3">
+        <div className="col-8 col-sm-6 col-md-4 col-lg-3">
         {loading ? (
         <Spinner animation="border" role="status"/>
 

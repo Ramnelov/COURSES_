@@ -1,8 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createUser } from '../services/api';
 import { AuthContext } from '../context/AuthContext';
 import { NotificationContext } from '../context/NotificationContext';
+import { ProgressBar } from 'react-bootstrap';
+
 
 function CreateUserForm() {
 
@@ -16,9 +18,20 @@ function CreateUserForm() {
   const [usernameTouched, setUsernameTouched] = useState(false);
   const [emailTouched, setEmailTouched] = useState(false);
   const [passwordTouched, setPasswordTouched] = useState(false);
+  const [passwordStrength, setPasswordStrength] = useState(0);
+
+  useEffect(() => {
+    let strength = 0;
+    if (/[a-z]/.test(password)) strength++; // Lowercase letter
+    if (/[A-Z]/.test(password)) strength++; // Uppercase letter
+    if (/[0-9]/.test(password)) strength++; // Number
+    if (/[@$!%*?&]/.test(password)) strength++; // Special character
+    if (password.length >= 8) strength++; // Minimum length
+    setPasswordStrength(strength * 20); // Update password strength
+  }, [password]);
 
   function validateEmail(email: string) {
-    var re = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; ;
+    var re = /^[\w.-]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
     return re.test(email);
   }
 
@@ -51,7 +64,7 @@ function CreateUserForm() {
   return (
     <div className="container">
       <div className="row justify-content-center">
-        <div className="col-3">
+        <div className="col-8 col-sm-6 col-md-4 col-lg-3">
         <form onSubmit={handleSubmit}>
       <div className="form-group">
         <label>Username:</label>
@@ -82,16 +95,36 @@ function CreateUserForm() {
           onChange={(e) => setPassword(e.target.value)}
           onFocus={() => setPasswordTouched(true)}
         />
-      </div>
-            {error && <div className="alert alert-danger mt-3">{error}</div>}
-            <button type="submit" className="btn btn-primary mt-3" disabled={!validateUsername(username) || !validateEmail(email) || !validatePassword(password)}>Create Account</button>
+        {passwordTouched && (
+    <div style={{ position: 'relative' }}>
+      <ProgressBar
+        style={{ position: 'absolute', width: '100%', bottom: '-20px' }}
+        now={passwordStrength}
+        variant={passwordStrength < 50 ? 'danger' : passwordStrength < 100 ? 'warning' : 'success'}
+      />
+    </div>
+  )}
+      </div >
+      <div style={{ marginTop: '25px' }}>
+  {error && <div className="alert alert-danger mt-3">{error}</div>}
+  <button
+    type="submit"
+    className="btn btn-primary mt-3"
+    disabled={!validateUsername(username) || !validateEmail(email) || !validatePassword(password)}
+  >
+    Create Account
+  </button>
+  <div className="mt-3">
+    Already have an account? <Link to="/">Login</Link>
+  </div>
+</div>
           </form>
-          <div className="mt-3">
-            Already have an account? <Link to="/">Login</Link>
-          </div>
+          
+          
         </div>
       </div>
     </div>
+    
   );
 }
 

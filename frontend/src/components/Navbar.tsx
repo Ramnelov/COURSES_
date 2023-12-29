@@ -32,7 +32,12 @@ const NavigationBar: React.FC = () => {
       </Nav>
       <Navbar.Collapse className="justify-content-end">
           {loggedIn ? (
-          <Button variant="outline-light" onClick={handleLogout} style={{ marginRight: '5px' }}>Log Out</Button>
+            <>
+            <Navbar.Text className="text-white" style={{ marginRight: '10px' }}>
+              {localStorage.getItem('username')}
+            </Navbar.Text>
+            <Button variant="outline-light" onClick={handleLogout} style={{ marginRight: '5px' }}>Log Out</Button>
+          </>
         ) : (
           <Button variant="outline-light" onClick={handleLoginRedirect} style={{ marginRight: '5px' }}>Log In</Button>
         )}

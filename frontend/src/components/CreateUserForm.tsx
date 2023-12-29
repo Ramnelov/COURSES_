@@ -1,19 +1,18 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { createUser } from '../services/api';
-import { AuthContext } from '../context/AuthContext';
-import { NotificationContext } from '../context/NotificationContext';
-import { ProgressBar } from 'react-bootstrap';
-
+import React, { useState, useContext, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { createUser } from "../services/api";
+import { NotificationContext } from "../context/NotificationContext";
+import { ProgressBar } from "react-bootstrap";
+import { CSSTransition } from "react-transition-group";
+import "../styles/App.scss";
 
 function CreateUserForm() {
-
   const { setNotification } = useContext(NotificationContext);
 
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const [usernameTouched, setUsernameTouched] = useState(false);
   const [emailTouched, setEmailTouched] = useState(false);
@@ -41,7 +40,8 @@ function CreateUserForm() {
   }
 
   function validatePassword(password: string) {
-    var re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    var re =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return re.test(password);
   }
 
@@ -50,8 +50,8 @@ function CreateUserForm() {
     try {
       const response = await createUser(username, password, email);
       if (response === "Registration successful") {
-        setNotification('User successfully created', 'success');
-        navigate('/');
+        setNotification("User successfully created", "success");
+        navigate("/");
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -65,66 +65,88 @@ function CreateUserForm() {
     <div className="container">
       <div className="row justify-content-center">
         <div className="col-8 col-sm-6 col-md-4 col-lg-3">
-        <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label>Username:</label>
-        <input
-          type="text"
-          className={`form-control ${!validateUsername(username) && usernameTouched ? 'is-invalid' : ''}`}
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          onFocus={() => setUsernameTouched(true)}
-        />
-      </div>
-      <div className="form-group">
-        <label>Email:</label>
-        <input
-          type="email"
-          className={`form-control ${!validateEmail(email) && emailTouched ? 'is-invalid' : ''}`}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          onFocus={() => setEmailTouched(true)}
-        />
-      </div>
-      <div className="form-group">
-        <label>Password:</label>
-        <input
-          type="password"
-          className={`form-control ${!validatePassword(password) && passwordTouched ? 'is-invalid' : ''}`}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          onFocus={() => setPasswordTouched(true)}
-        />
-        {passwordTouched && (
-    <div style={{ position: 'relative' }}>
-      <ProgressBar
-        style={{ position: 'absolute', width: '100%', bottom: '-20px' }}
-        now={passwordStrength}
-        variant={passwordStrength < 50 ? 'danger' : passwordStrength < 100 ? 'warning' : 'success'}
-      />
-    </div>
-  )}
-      </div >
-      <div style={{ marginTop: '25px' }}>
-  {error && <div className="alert alert-danger mt-3">{error}</div>}
-  <button
-    type="submit"
-    className="btn btn-primary mt-3"
-    disabled={!validateUsername(username) || !validateEmail(email) || !validatePassword(password)}
-  >
-    Create Account
-  </button>
-  <div className="mt-3">
-    Already have an account? <Link to="/">Login</Link>
-  </div>
-</div>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>Username:</label>
+              <input
+                type="text"
+                className={`form-control ${
+                  !validateUsername(username) && usernameTouched
+                    ? "is-invalid"
+                    : ""
+                }`}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                onFocus={() => setUsernameTouched(true)}
+              />
+            </div>
+            <div className="form-group">
+              <label>Email:</label>
+              <input
+                type="email"
+                className={`form-control ${
+                  !validateEmail(email) && emailTouched ? "is-invalid" : ""
+                }`}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                onFocus={() => setEmailTouched(true)}
+              />
+            </div>
+            <div className="form-group">
+              <label>Password:</label>
+              <input
+                type="password"
+                className={`form-control ${
+                  !validatePassword(password) && passwordTouched
+                    ? "is-invalid"
+                    : ""
+                }`}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                onFocus={() => setPasswordTouched(true)}
+              />
+              <CSSTransition
+                in={passwordTouched}
+                timeout={300}
+                classNames="fade"
+                unmountOnExit
+              >
+                <ProgressBar
+                  now={passwordStrength}
+                  variant={
+                    passwordStrength < 50
+                      ? "danger"
+                      : passwordStrength < 100
+                      ? "warning"
+                      : "success"
+                  }
+                  style={{ marginTop: "5px" }}
+                />
+              </CSSTransition>
+            </div>
+            {error && <div className="alert alert-danger mt-3">{error}</div>}
+            <CSSTransition in={passwordTouched} timeout={300} classNames="move">
+              <div>
+                <button
+                  type="submit"
+                  className="btn btn-primary mt-3"
+                  disabled={
+                    !validateUsername(username) ||
+                    !validateEmail(email) ||
+                    !validatePassword(password)
+                  }
+                >
+                  Create Account
+                </button>
+                <div className="mt-3">
+                  Already have an account? <Link to="/">Login</Link>
+                </div>
+              </div>
+            </CSSTransition>
           </form>
-          
-          
         </div>
       </div>
     </div>
-    
   );
 }
 

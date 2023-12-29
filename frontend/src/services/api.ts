@@ -1,7 +1,6 @@
 // src/services/api.ts
-import React, { useContext } from 'react';
-import { AuthContext } from '../context/AuthContext';
-
+import React, { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 export interface User {
   username: string;
@@ -9,11 +8,14 @@ export interface User {
   email: string;
 }
 
-export async function getToken(username: string, password: string): Promise<string> {
-  const response = await fetch('http://192.168.0.63:8443/api/users/token', {
-    method: 'POST',
+export async function getToken(
+  username: string,
+  password: string
+): Promise<string> {
+  const response = await fetch("http://192.168.0.63:8443/api/users/token", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({ username, password }),
   });
@@ -26,26 +28,30 @@ export async function getToken(username: string, password: string): Promise<stri
 }
 
 export async function getUser(token: string): Promise<any> {
-  const response = await fetch('http://192.168.0.63:8443/api/users/', {
-    method: 'GET',
+  const response = await fetch("http://192.168.0.63:8443/api/users/", {
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
   });
 
-   if (!response.ok) {
+  if (!response.ok) {
     throw response;
   }
 
   return response.json();
 }
 
-export async function createUser(username: string, password: string, email: string): Promise<any> {
-  const response = await fetch('http://192.168.0.63:8443/api/users/', {
-    method: 'POST',
+export async function createUser(
+  username: string,
+  password: string,
+  email: string
+): Promise<any> {
+  const response = await fetch("http://192.168.0.63:8443/api/users/", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({ username, password, email }),
   });

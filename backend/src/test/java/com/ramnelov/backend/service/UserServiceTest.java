@@ -77,9 +77,9 @@ public class UserServiceTest {
     public void testGetUserById() {
         UserEntity user = new UserEntity();
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
-        Optional<UserEntity> result = userService.getUserById(1L);
-        assertTrue(result.isPresent());
-        assertEquals(user, result.get());
+        UserEntity result = userService.getUserById(1L);
+        assertNotNull(result);
+        assertEquals(user, result);
     }
 
     @Test

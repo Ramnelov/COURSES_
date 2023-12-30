@@ -166,7 +166,7 @@ public class UserControllerIntegrationTest {
         assertEquals(content, "User updated");
 
         // Verify that the user was updated
-        UserEntity updatedUser = userService.getUserById(userId).orElseThrow(RuntimeException::new);
+        UserEntity updatedUser = userService.getUserById(userId);
         assertEquals("updatedUsername", updatedUser.getUsername());
         assertEquals(userService.encodePassword(userUpdated.getPassword()).substring(0, 7), updatedUser.getPassword().substring(0, 7));
         assertEquals("updated@example.com", updatedUser.getEmail());
@@ -216,7 +216,7 @@ public class UserControllerIntegrationTest {
         assertEquals(content, "User updated");
 
         // Verify that the user was updated
-        UserEntity updatedUser = userService.getUserById(userId).orElseThrow(RuntimeException::new);
+        UserEntity updatedUser = userService.getUserById(userId);
         assertEquals("updatedUsername", updatedUser.getUsername());
         assertEquals(userService.encodePassword(userUpdated.getPassword()).substring(0, 7), updatedUser.getPassword().substring(0, 7));
         assertEquals("updated@example.com", updatedUser.getEmail());

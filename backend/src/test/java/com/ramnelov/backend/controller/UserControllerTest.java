@@ -169,7 +169,7 @@ public class UserControllerTest {
         user.setEmail("testUser@test.com");
         user.setRole(Role.USER);
 
-        lenient().when(userService.getUserById(1L)).thenReturn(Optional.of(user));
+        lenient().when(userService.getUserById(1L)).thenReturn(user);
 
         lenient().when(userService.userExistById(1L)).thenReturn(true);
 
@@ -278,7 +278,7 @@ public class UserControllerTest {
 
         Jwt jwt = new Jwt("token", Instant.now(), Instant.now().plusSeconds(3600), headers, claims);
 
-        lenient().when(userService.getUserById(1L)).thenReturn(Optional.of(user));
+        lenient().when(userService.getUserById(1L)).thenReturn(user);
         lenient().when(userService.userExistById(1L)).thenReturn(true);
 
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.delete("/api/users/admin/1")

@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="598582c2-2000-443d-ac38-77f71d9064aa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ramnelov/backend/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ramnelov/backend/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ramnelov/backend/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ramnelov/backend/service/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +52,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/46735/projekt/user-application/backend&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/46735/projekt/courses_/backend&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -169,6 +167,8 @@
       <workItem from="1703780256837" duration="5720000" />
       <workItem from="1703847372637" duration="1455000" />
       <workItem from="1703888296278" duration="966000" />
+      <workItem from="1703895389117" duration="612000" />
+      <workItem from="1703953029863" duration="602000" />
     </task>
     <servers />
   </component>

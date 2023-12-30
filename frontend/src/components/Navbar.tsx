@@ -19,9 +19,9 @@ const NavigationBar: React.FC = () => {
     setUser(null);
     localStorage.removeItem("loggedIn"); // Remove the loggedIn status from local storage
     localStorage.removeItem("token"); // Remove the token from local storage
-    localStorage.removeItem("username"); // Remove the username from local storage
-    localStorage.removeItem("role"); // Remove the role from local storage
-    localStorage.removeItem("email"); // Remove the email from local storage
+    localStorage.removeItem("username")
+    localStorage.removeItem("email")
+    localStorage.removeItem("role")
     setNotification("", "info");
     navigate("/");
   };
@@ -41,7 +41,7 @@ const NavigationBar: React.FC = () => {
             onClick={() => navigate("/")}
           />
         </Navbar.Brand>
-        {loggedIn && user?.role === "USER" && (
+        {loggedIn && (user?.role || localStorage.getItem("role")) === "USER" && (
           <Navbar.Text
             className="text-white"
             onClick={() => navigate("/account")}
@@ -50,7 +50,7 @@ const NavigationBar: React.FC = () => {
             Account
           </Navbar.Text>
         )}
-        {loggedIn && user?.role === "ADMIN" && (
+        {loggedIn && (user?.role || localStorage.getItem("role")) === "ADMIN" && (
           <>
             <Navbar.Text
               className="text-white"
@@ -73,7 +73,7 @@ const NavigationBar: React.FC = () => {
         {loggedIn ? (
           <>
             <Navbar.Text className="text-white" style={{ marginRight: "10px" }}>
-              {user?.username}
+            {user?.username || localStorage.getItem("username")}
             </Navbar.Text>
             <Button
               variant="outline-light"

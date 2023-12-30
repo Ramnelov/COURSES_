@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { getUser, User } from "../services/api";
+import { getUser } from "../services/api";
 import { AuthContext } from "../context/AuthContext";
 import { Spinner } from "react-bootstrap";
 import { NotificationContext } from "../context/NotificationContext";
@@ -17,6 +17,9 @@ const LoggedIn: React.FC = () => {
         .then((data) => {
           console.log(data);
           setUser(data);
+          localStorage.setItem("username", data.username);
+          localStorage.setItem("email", data.email);
+          localStorage.setItem("role", data.role);
         })
         .catch((error) => {
           console.error(error);
@@ -25,6 +28,9 @@ const LoggedIn: React.FC = () => {
             setUser(null);
             localStorage.removeItem("token");
             localStorage.setItem("loggedIn", "false");
+            localStorage.removeItem("username")
+            localStorage.removeItem("email")
+            localStorage.removeItem("role")
             setNotification("You were logged out.", "warning");
           }
         });

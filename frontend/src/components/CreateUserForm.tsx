@@ -5,6 +5,7 @@ import { NotificationContext } from "../context/NotificationContext";
 import { ProgressBar } from "react-bootstrap";
 import { CSSTransition } from "react-transition-group";
 import "../styles/App.scss";
+import { validateUsername, validatePassword, validateEmail, validateConfirmPassword } from "../services/validation";
 
 function CreateUserForm() {
   const { setNotification } = useContext(NotificationContext);
@@ -19,6 +20,9 @@ function CreateUserForm() {
   const [passwordTouched, setPasswordTouched] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState(0);
 
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [confirmPasswordTouched, setConfirmPasswordTouched] = useState(false);
+
   useEffect(() => {
     let strength = 0;
     if (/[a-z]/.test(password)) strength++; // Lowercase letter
@@ -29,21 +33,7 @@ function CreateUserForm() {
     setPasswordStrength(strength * 20); // Update password strength
   }, [password]);
 
-  function validateEmail(email: string) {
-    var re = /^[\w.-]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-    return re.test(email);
-  }
-
-  function validateUsername(username: string) {
-    var re = /^[a-zA-Z0-9]{3,20}$/;
-    return re.test(username);
-  }
-
-  function validatePassword(password: string) {
-    var re =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    return re.test(password);
-  }
+  
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -124,6 +114,23 @@ function CreateUserForm() {
                 />
               </CSSTransition>
             </div>
+            <CSSTransition in={passwordTouched} timeout={300} classNames="move">
+            <div className="form-group">
+              <label>Confirm Password:</label>
+              <input
+                type="password"
+                className={`form-control ${
+                  !validateConfirmPassword(confirmPassword, password) &&
+                  confirmPasswordTouched
+                    ? "is-invalid"
+                    : ""
+                }`}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                onFocus={() => setConfirmPasswordTouched(true)}
+              />
+            </div>
+            </CSSTransition>
             {error && <div className="alert alert-danger mt-3">{error}</div>}
             <CSSTransition in={passwordTouched} timeout={300} classNames="move">
               <div>
@@ -133,7 +140,8 @@ function CreateUserForm() {
                   disabled={
                     !validateUsername(username) ||
                     !validateEmail(email) ||
-                    !validatePassword(password)
+                    !validatePassword(password) ||
+                    !validateConfirmPassword(confirmPassword, password)
                   }
                 >
                   Create Account

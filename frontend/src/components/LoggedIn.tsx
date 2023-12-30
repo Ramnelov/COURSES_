@@ -2,23 +2,30 @@ import React, { useEffect, useState, useContext } from "react";
 import { getUser, User } from "../services/api";
 import { AuthContext } from "../context/AuthContext";
 import { Spinner } from "react-bootstrap";
+import { NotificationContext } from "../context/NotificationContext";
+import { UserContext } from "../context/UserContext";
 
-function UserComponent() {
-  const [user, setUser] = useState<User | null>(null);
-
+const LoggedIn: React.FC = () => {
+  const { user, setUser } = useContext(UserContext);
   const { setLoggedIn } = useContext(AuthContext);
+  const { setNotification } = useContext(NotificationContext);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       getUser(token)
-        .then((data) => setUser(data))
+        .then((data) => {
+          console.log(data);
+          setUser(data);
+        })
         .catch((error) => {
           console.error(error);
           if (error.status === 401) {
             setLoggedIn(false);
+            setUser(null);
             localStorage.removeItem("token");
             localStorage.setItem("loggedIn", "false");
+            setNotification("You were logged out.", "warning");
           }
         });
     }
@@ -42,6 +49,6 @@ function UserComponent() {
       )}
     </div>
   );
-}
+};
 
-export default UserComponent;
+export default LoggedIn;

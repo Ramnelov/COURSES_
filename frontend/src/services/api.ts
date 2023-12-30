@@ -12,7 +12,7 @@ export async function getToken(
   username: string,
   password: string
 ): Promise<string> {
-  const response = await fetch("http://192.168.0.63:8443/api/users/token", {
+  const response = await fetch("http://localhost:8443/api/users/token", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export async function getToken(
 }
 
 export async function getUser(token: string): Promise<any> {
-  const response = await fetch("http://192.168.0.63:8443/api/users/", {
+  const response = await fetch("http://localhost:8443/api/users/", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -48,7 +48,7 @@ export async function createUser(
   password: string,
   email: string
 ): Promise<any> {
-  const response = await fetch("http://192.168.0.63:8443/api/users/", {
+  const response = await fetch("http://localhost:8443/api/users/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

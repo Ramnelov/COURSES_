@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import logo from "./logo.svg";
+import React, { useContext, useState } from "react";
 import "./styles/App.scss";
 import "bootstrap/dist/css/bootstrap.css";
 import NavigationBar from "./components/Navbar"; // Import the Navbar component
@@ -11,30 +10,38 @@ import CreateUserForm from "./components/CreateUserForm";
 import TestComponent from "./components/TestComponent";
 import { NotificationProvider } from "./context/NotificationContext";
 import { Notification } from "./components/Notification";
+import { User } from "./services/api";
+import { UserContext } from "./context/UserContext";
 
 function App() {
   const { loggedIn } = useContext(AuthContext);
+  // Create a UserContext
+
+  // In your parent component
+  const [user, setUser] = useState<User | null>(null);
 
   return (
     <NotificationProvider>
-      <div className="App">
-        <div className="header">
-          <NavigationBar />
-          <div className="notification-wrapper">
-            <Notification />
+      <UserContext.Provider value={{ user, setUser }}>
+        <div className="App">
+          <div className="header">
+            <NavigationBar />
+            <div className="notification-wrapper">
+              <Notification />
+            </div>
+          </div>
+          <div className="main-content">
+            <Routes>
+              <Route
+                path="/"
+                element={loggedIn ? <LoggedInComponent /> : <LoginForm />}
+              />
+              <Route path="/create" element={<CreateUserForm />} />
+              <Route path="/test" element={<TestComponent />} />
+            </Routes>
           </div>
         </div>
-        <div className="main-content">
-          <Routes>
-            <Route
-              path="/"
-              element={loggedIn ? <LoggedInComponent /> : <LoginForm />}
-            />
-            <Route path="/create" element={<CreateUserForm />} />
-            <Route path="/test" element={<TestComponent />} />
-          </Routes>
-        </div>
-      </div>
+      </UserContext.Provider>
     </NotificationProvider>
   );
 }

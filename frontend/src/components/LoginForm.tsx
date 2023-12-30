@@ -24,7 +24,6 @@ function LoginForm() {
       if (token) {
         localStorage.setItem("token", token);
         localStorage.setItem("loggedIn", "true");
-        localStorage.setItem("username", username);
         setLoggedIn(true);
         setNotification("", "info");
       }
@@ -83,6 +82,10 @@ function LoginForm() {
               </form>
               <div className="mt-3">
                 No account? <Link to="/create">Create one</Link>
+              </div>
+              <div className="mt-3">
+                Forgoten password?{" "}
+                <Link to="/restore-password">Restore it</Link>
               </div>
             </div>
           )}

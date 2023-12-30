@@ -18,7 +18,7 @@ Also a vast amount of focus will be put in the user experience and making sure t
 
 ## The plan
 
-The plan is to start with implementing the user-part of the application, beginning with the backend. This is because user-level is the highest of all, each user has courses, and each course has examinations. Beginning with e.g. courses and building a first prototype would lead to extra work.
+The plan is to start with implementing the user-part of the application, beginning with the backend. This is because the user-level is the highest of all, each user has courses, and each course has examinations. Beginning with e.g. courses and building a first prototype would lead to extra work.
 
 ## Contact
 

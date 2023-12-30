@@ -14,4 +14,4 @@ A vast amout of focus will be put in the user experience and making sure that th
 
 # Contact
 
-You can either contact me via [mail](mailto:felix@ramnelov.com) or [LinkedIn](https://www.linkedin.com/in/felixramnelöv/).
+You can either contact me via [e-mail](mailto:felix@ramnelov.com) or [LinkedIn](https://www.linkedin.com/in/felixramnelöv/).

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { getUser } from "../services/api";
 import { AuthContext } from "../context/AuthContext";
 import { Spinner } from "react-bootstrap";

@@ -13,6 +13,7 @@ import { Notification } from "./components/Notification";
 import { User } from "./services/api";
 import { UserContext } from "./context/UserContext";
 import AccountComponent from "./components/Account";
+import AdminComponent from "./components/Admin";
 
 function App() {
   const { loggedIn } = useContext(AuthContext);
@@ -40,6 +41,7 @@ function App() {
               <Route path="/create" element={<CreateUserForm />} />
               <Route path="/test" element={<TestComponent />} />
               <Route path="/account" element={<AccountComponent />} />
+              <Route path="/admin" element={<AdminComponent />} />
             </Routes>
           </div>
         </div>

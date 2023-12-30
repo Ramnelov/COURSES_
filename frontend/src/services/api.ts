@@ -1,6 +1,4 @@
 // src/services/api.ts
-import React, { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
 
 export interface User {
   username: string;

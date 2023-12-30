@@ -1,5 +1,5 @@
 // src/components/Navbar.tsx
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Navbar, Nav, Button } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
@@ -19,9 +19,9 @@ const NavigationBar: React.FC = () => {
     setUser(null);
     localStorage.removeItem("loggedIn"); // Remove the loggedIn status from local storage
     localStorage.removeItem("token"); // Remove the token from local storage
-    localStorage.removeItem("username")
-    localStorage.removeItem("email")
-    localStorage.removeItem("role")
+    localStorage.removeItem("username");
+    localStorage.removeItem("email");
+    localStorage.removeItem("role");
     setNotification("", "info");
     navigate("/");
   };
@@ -41,39 +41,59 @@ const NavigationBar: React.FC = () => {
             onClick={() => navigate("/")}
           />
         </Navbar.Brand>
-        {loggedIn && (user?.role || localStorage.getItem("role")) === "USER" && (
-          <Navbar.Text
-            className="text-white"
-            onClick={() => navigate("/account")}
-            style={{ cursor: "pointer" }}
-          >
-            Account
-          </Navbar.Text>
-        )}
-        {loggedIn && (user?.role || localStorage.getItem("role")) === "ADMIN" && (
-          <>
-            <Navbar.Text
-              className="text-white"
-              onClick={() => navigate("/account")}
-              style={{ cursor: "pointer" }}
-            >
-              Account
-            </Navbar.Text>
-            <Navbar.Text
-              className="text-white"
-              onClick={() => navigate("/admin")}
-              style={{ marginLeft: "10px", cursor: "pointer" }}
-            >
-              Admin
-            </Navbar.Text>
-          </>
-        )}
+        {loggedIn &&
+          (user?.role || localStorage.getItem("role")) === "USER" && (
+            <>
+              <Navbar.Text
+                className="text-white"
+                onClick={() => navigate("/home")}
+                style={{ cursor: "pointer" }}
+              >
+                Home
+              </Navbar.Text>
+
+              <Navbar.Text
+                className="text-white"
+                onClick={() => navigate("/account")}
+                style={{ marginLeft: "10px", cursor: "pointer" }}
+              >
+                Account
+              </Navbar.Text>
+            </>
+          )}
+        {loggedIn &&
+          (user?.role || localStorage.getItem("role")) === "ADMIN" && (
+            <>
+              <Navbar.Text
+                className="text-white"
+                onClick={() => navigate("/")}
+                style={{ cursor: "pointer" }}
+              >
+                Home
+              </Navbar.Text>
+
+              <Navbar.Text
+                className="text-white"
+                onClick={() => navigate("/account")}
+                style={{ marginLeft: "10px", cursor: "pointer" }}
+              >
+                Account
+              </Navbar.Text>
+              <Navbar.Text
+                className="text-white"
+                onClick={() => navigate("/admin")}
+                style={{ marginLeft: "10px", cursor: "pointer" }}
+              >
+                Admin
+              </Navbar.Text>
+            </>
+          )}
       </Nav>
       <Navbar.Collapse className="justify-content-end">
         {loggedIn ? (
           <>
             <Navbar.Text className="text-white" style={{ marginRight: "10px" }}>
-            {user?.username || localStorage.getItem("username")}
+              {user?.username || localStorage.getItem("username")}
             </Navbar.Text>
             <Button
               variant="outline-light"

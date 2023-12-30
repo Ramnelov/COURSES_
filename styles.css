@@ -11,7 +11,7 @@ body {
   text-align: left; /* Align text to the left */
   min-height: 100vh;
   margin: 0 auto; /* Center the body content */
-  max-width: 50%; /* Set the maximum width */
+  max-width: 640px; /* Set the maximum width */
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   color: white;
 }

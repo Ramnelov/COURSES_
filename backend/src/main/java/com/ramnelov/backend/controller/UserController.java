@@ -158,7 +158,7 @@ public class UserController {
             if (tokenService.getAuthority(jwt).equals(Role.ADMIN.name())) {
 
                 if (userService.userExistById(id)) {
-                    UserEntity user = userService.getUserById(id).orElseThrow(RuntimeException::new);
+                    UserEntity user = userService.getUserById(id);
 
                     if (userDTO.getUsername() != null && !userDTO.getUsername().equalsIgnoreCase(user.getUsername())) {
 
@@ -310,7 +310,7 @@ public class UserController {
         if (bucket.tryConsume(1)) {
             if (tokenService.getAuthority(jwt).equals(Role.ADMIN.name())) {
                 if (userService.userExistById(id)) {
-                    UserEntity user = userService.getUserById(id).orElseThrow(RuntimeException::new);
+                    UserEntity user = userService.getUserById(id);
                     userService.deleteUser(id);
                     logger.info("User deleted: " + user);
                     return ResponseEntity.ok("User deleted");

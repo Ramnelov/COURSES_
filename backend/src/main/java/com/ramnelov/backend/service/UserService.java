@@ -26,14 +26,23 @@ public class UserService {
     }
 
     public UserEntity getUserByUsername(String username) {
-        return userRepository.findByUsernameIgnoreCase(username)
+
+        UserEntity user = userRepository.findByUsernameIgnoreCase(username)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
+
+        user.setPassword(null);
+
+        return user;
 
     }
 
     public UserEntity getUserByEmail(String email) {
-        return userRepository.findByEmailIgnoreCase(email)
+        UserEntity user = userRepository.findByEmailIgnoreCase(email)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
+
+        user.setPassword(null);
+
+        return user;
 
     }
 
@@ -50,8 +59,14 @@ public class UserService {
         return userRepository.existsByEmailIgnoreCase(email);
     }
 
-    public Optional<UserEntity> getUserById(Long userId) {
-        return userRepository.findById(userId);
+    public UserEntity getUserById(Long userId) {
+
+        UserEntity user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+
+        user.setPassword(null);
+
+        return user;
     }
 
 

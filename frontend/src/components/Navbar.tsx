@@ -23,6 +23,7 @@ const NavigationBar: React.FC = () => {
     localStorage.removeItem("role"); // Remove the role from local storage
     localStorage.removeItem("email"); // Remove the email from local storage
     setNotification("", "info");
+    navigate("/");
   };
 
   const handleLoginRedirect = () => {
@@ -36,11 +37,11 @@ const NavigationBar: React.FC = () => {
           <img
             src="logo-nav.png" // Replace with the path to your image
             alt="courses"
-            style={{ width: "85px", cursor: "pointer" }} // Adjust size as needed
+            style={{ width: "85px", cursor: "pointer", marginLeft: "10px" }} // Adjust size as needed
             onClick={() => navigate("/")}
           />
         </Navbar.Brand>
-        {loggedIn && (
+        {loggedIn && user?.role === "USER" && (
           <Navbar.Text
             className="text-white"
             onClick={() => navigate("/account")}
@@ -50,13 +51,22 @@ const NavigationBar: React.FC = () => {
           </Navbar.Text>
         )}
         {loggedIn && user?.role === "ADMIN" && (
-          <Navbar.Text
-            className="text-white"
-            onClick={() => navigate("/admin")}
-            style={{ marginLeft: "10px", cursor: "pointer" }}
-          >
-            Admin
-          </Navbar.Text>
+          <>
+            <Navbar.Text
+              className="text-white"
+              onClick={() => navigate("/account")}
+              style={{ cursor: "pointer" }}
+            >
+              Account
+            </Navbar.Text>
+            <Navbar.Text
+              className="text-white"
+              onClick={() => navigate("/admin")}
+              style={{ marginLeft: "10px", cursor: "pointer" }}
+            >
+              Admin
+            </Navbar.Text>
+          </>
         )}
       </Nav>
       <Navbar.Collapse className="justify-content-end">

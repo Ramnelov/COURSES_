@@ -1,14 +1,14 @@
-![courses_](/assets/png/logo-no-background.png)
+![COURSES_](/assets/png/logo-no-background.png)
 
 by Felix Ramnelöv
 
 ## Welcome
 
-Welcome to my fullstack-project 'courses_', a multi-user application for students to handle your university courses and monitoring data such as average grade and total amount of credits.
+Welcome to my fullstack-project 'COURSES_', a multi-user application for students to handle your university courses and monitoring data such as average grade and total amount of credits.
 
 ## The idea
 
-The idea is to have this application as a side project in combination with my studies as a M.Sc. student in CSE. The application both involves backend with a **Java Spring Boot** rest application to access as **Postgres** database and frontend using **React** with **Typescript** and **Bootstrap**. 
+The idea is to have this application as a side project in combination with my studies as a M.Sc. student in CSE. The application both involves backend with a **Java Spring Boot** rest application to access as **PostgreSQL** database and frontend using **React** with **Typescript** and **Bootstrap**. 
 
 The application will support multiple users at the same time with high security using password encryption and JSON Web Tokens. 
 

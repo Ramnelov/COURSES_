@@ -154,5 +154,5 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# idea
-.idea/
+# IntelliJ IDEA files
+backend/.idea/

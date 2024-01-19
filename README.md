@@ -38,7 +38,7 @@ a prototype of implemented functionality. A good amount of focus has
 been put into the user experience and e.g. making sure the creation of
 an account is done in a safe and secure way.
 
-[![COURSES_ demo-0.1](https://i9.ytimg.com/vi_webp/-iZi9EfzOwQ/mqdefault.webp?v=65aaedea&sqp=CNzaq60G&rs=AOn4CLAsMPIeJA4WtxPSXdbnNNKVz4MjMg)](https://youtu.be/-iZi9EfzOwQ)
+[![COURSES_ demo-0.1](https://i9.ytimg.com/vi_webp/-iZi9EfzOwQ/mqdefault.webp?v=65aaf25a&sqp=CIzkq60G&rs=AOn4CLANkfQyWUeHfS0p8gqXnN5TiXwlxA)](https://youtu.be/-iZi9EfzOwQ)
 
 ## Contact
 

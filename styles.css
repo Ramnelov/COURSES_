@@ -110,3 +110,14 @@ p {
   margin-top: 0px;
   margin-bottom: 1em;
 }
+
+.video-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 0px;
+  margin-bottom: 1em;
+}
+
+video {
+  border-radius: 3px;
+}

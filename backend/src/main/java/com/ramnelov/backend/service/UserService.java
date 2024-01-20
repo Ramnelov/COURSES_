@@ -30,7 +30,7 @@ public class UserService {
         UserEntity user = userRepository.findByUsernameIgnoreCase(username)
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
 
-        user.setPassword(null);
+
 
         return user;
 
@@ -77,9 +77,12 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public UserEntity updateUser(UserEntity user) {
+    public UserEntity updateUser(UserEntity user, boolean passwordEncodeRequired) {
 
-        user.setPassword(encodePassword(user.getPassword()));
+        if (passwordEncodeRequired) {
+            user.setPassword(encodePassword(user.getPassword()));
+        }
+
 
         return userRepository.save(user);
     }

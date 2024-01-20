@@ -12,10 +12,13 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 import com.ramnelov.backend.utils.Role;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -152,6 +155,8 @@ public class UserController {
     }
 
 
+
+
     @PutMapping("admin/{id}")
     public ResponseEntity<String> updateUserAdmin(@PathVariable Long id, @RequestBody UserDTO userDTO, @RequestAttribute("jwt") Jwt jwt) {
         if (bucket.tryConsume(1)) {
@@ -175,8 +180,10 @@ public class UserController {
                         }
                     }
 
-                    if (userDTO.getPassword() != null) {
+                    boolean passwordEncodeRequired = false;
 
+                    if (userDTO.getPassword() != null) {
+                        passwordEncodeRequired = true;
                         if (userService.isPasswordSafe(userDTO.getPassword())) {
                             user.setPassword(userDTO.getPassword());
 
@@ -211,7 +218,7 @@ public class UserController {
                     }
 
 
-                    userService.updateUser(user);
+                    userService.updateUser(user, passwordEncodeRequired);
                     logger.info("User updated: " + user);
                     return ResponseEntity.ok("User updated");
                 } else {
@@ -235,7 +242,11 @@ public class UserController {
 
 
             if (userService.userExistsByUsername(tokenService.getUsername(jwt))) {
+
+
                 UserEntity user = userService.getUserByUsername(tokenService.getUsername(jwt));
+
+
                 if (userDTO.getUsername() != null && !userDTO.getUsername().equalsIgnoreCase(user.getUsername())) {
                     if (!userService.isValidUsername(userDTO.getUsername())) {
                         logger.error("Invalid username: " + userDTO.getUsername() + "for user: " + user);
@@ -247,8 +258,10 @@ public class UserController {
                         user.setUsername(userDTO.getUsername());
                     }
                 }
+                boolean passwordEncodeRequired = false;
 
                 if (userDTO.getPassword() != null) {
+                    passwordEncodeRequired = true;
                     if (userService.isPasswordSafe(userDTO.getPassword())) {
                         user.setPassword(userDTO.getPassword());
                     } else {
@@ -271,10 +284,19 @@ public class UserController {
 
 
 
-                userService.updateUser(user);
+                userService.updateUser(user, passwordEncodeRequired);
                 logger.info("User updated: " + user);
 
-                return ResponseEntity.ok("User updated");
+                List<GrantedAuthority> authorities = Arrays.stream(Role.values())
+                        .map(role -> new SimpleGrantedAuthority(role.name()))
+                        .collect(Collectors.toList());
+
+                Authentication authentication = new UsernamePasswordAuthenticationToken(user.getUsername(), null, authorities);
+                String token = tokenService.generateToken(authentication);
+                logger.info("Token updated: " + token);
+
+
+                return ResponseEntity.ok(token);
             } else {
                 logger.error("Unauthorized");
                 return ResponseEntity.status(401).body("Unauthorized");
@@ -336,6 +358,7 @@ public class UserController {
         if (bucket.tryConsume(1)) {
             if (userService.userExistsByUsername(tokenService.getUsername(jwt))) {
                 UserEntity user = userService.getUserByUsername(tokenService.getUsername(jwt));
+                user.setPassword(null);
                 logger.info("User found: " + user);
                 return ResponseEntity.ok(UserEntity.toDTO(user));
             } else {
@@ -355,6 +378,7 @@ public class UserController {
         if (bucket.tryConsume(1)) {
             if (tokenService.getAuthority(jwt).equals(Role.ADMIN.name())) {
                 List<UserEntity> users = userService.getAllUsers();
+                users.forEach(user -> user.setPassword(null));
                 List<UserDTO> userDTOs = users.stream().map(UserEntity::toDTO).collect(Collectors.toList());
                 logger.info("Users found: " + users);
                 return ResponseEntity.ok(userDTOs);

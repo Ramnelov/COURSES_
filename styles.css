@@ -19,6 +19,7 @@ img {
   width: 100%;
   height: auto;
   object-fit: cover;
+  
 }
 
 ::-webkit-scrollbar {
@@ -116,8 +117,10 @@ p {
   justify-content: center;
   margin-top: 0px;
   margin-bottom: 1em;
+  
 }
 
 video {
   border-radius: 3px;
+  box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.2);
 }

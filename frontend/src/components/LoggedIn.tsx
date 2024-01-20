@@ -44,6 +44,7 @@ const LoggedIn: React.FC = () => {
           <h1>Hello, {user.username}!</h1>
           <p>Your role is: {user.role}</p>
           <p>Your email is: {user.email}</p>
+          <p>In the future you will be able to see your courses here.</p>
         </>
       ) : (
         <div

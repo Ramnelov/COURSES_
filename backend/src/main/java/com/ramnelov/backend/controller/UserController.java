@@ -175,7 +175,7 @@ public class UserController {
                         }
                     }
 
-                    if (userDTO.getPassword() != null && !user.getPassword().equals(userService.encodePassword(userDTO.getPassword()))) {
+                    if (userDTO.getPassword() != null) {
 
                         if (userService.isPasswordSafe(userDTO.getPassword())) {
                             user.setPassword(userDTO.getPassword());
@@ -232,9 +232,10 @@ public class UserController {
     public ResponseEntity<String> updateUser(@RequestBody UserDTO userDTO, @RequestAttribute("jwt") Jwt jwt) {
         if (bucket.tryConsume(1)) {
 
+
+
             if (userService.userExistsByUsername(tokenService.getUsername(jwt))) {
                 UserEntity user = userService.getUserByUsername(tokenService.getUsername(jwt));
-
                 if (userDTO.getUsername() != null && !userDTO.getUsername().equalsIgnoreCase(user.getUsername())) {
                     if (!userService.isValidUsername(userDTO.getUsername())) {
                         logger.error("Invalid username: " + userDTO.getUsername() + "for user: " + user);
@@ -247,7 +248,7 @@ public class UserController {
                     }
                 }
 
-                if (userDTO.getPassword() != null && !user.getPassword().equals(userService.encodePassword(userDTO.getPassword()))) {
+                if (userDTO.getPassword() != null) {
                     if (userService.isPasswordSafe(userDTO.getPassword())) {
                         user.setPassword(userDTO.getPassword());
                     } else {
@@ -267,6 +268,8 @@ public class UserController {
                         user.setEmail(userDTO.getEmail().toLowerCase());
                     }
                 }
+
+
 
                 userService.updateUser(user);
                 logger.info("User updated: " + user);

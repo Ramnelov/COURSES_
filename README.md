@@ -22,21 +22,11 @@ The plan is to start with implementing the user-part of the application, beginni
 
 ## Progress
 
-Thus far the backend for users have been implemented and tested, and
-with it the API for both users and admins. As a user you have the
-ability to register, login, update your information and delete your
-account and as an admin you can do the same with the addition of
-managing and viewing all other users.
+Thus far the backend for users have been implemented and tested, and with it the API for both users and admins. As a user you have the ability to register, login, update your information and delete your account and as an admin you can do the same with the addition of managing and viewing all other users.
 
-In the frontend a first prototype of the user-part has been implemented
-with the ability to register and login. It has been prepared to
-implement the management of your own account and the extra functionality
-of an admin.
+In the frontend a first prototype of the user-part has been implemented with the ability to register and login. It has been prepared to implement the management of your own account and the extra functionality of an admin.
 
-Down bellow you can view a demo of the current state of the application,
-a prototype of implemented functionality. A good amount of focus has
-been put into the user experience and e.g. making sure the creation of
-an account is done in a safe and secure way.
+Down bellow you can view a demo of the current state of the application, a prototype of implemented functionality. Also a good amount of focus has been put into the user experience and e.g. making sure the creation of an account is done in a safe and secure way.
 
 [![COURSES_ demo-0.1](https://i9.ytimg.com/vi_webp/-iZi9EfzOwQ/mqdefault.webp?v=65aaf25a&sqp=CIzkq60G&rs=AOn4CLANkfQyWUeHfS0p8gqXnN5TiXwlxA)](https://youtu.be/-iZi9EfzOwQ)
 

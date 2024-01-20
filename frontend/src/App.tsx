@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import "./styles/App.scss";
 import "bootstrap/dist/css/bootstrap.css";
 import NavigationBar from "./components/Navbar"; // Import the Navbar component
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import LoggedInComponent from "./components/LoggedIn"; // Assuming SimpleComponent is in the same directory
 import { AuthContext } from "./context/AuthContext";
 import LoginForm from "./components/LoginForm";
@@ -22,6 +22,8 @@ function App() {
   // In your parent component
   const [user, setUser] = useState<User | null>(null);
 
+  const location = useLocation();
+
   return (
     <NotificationProvider>
       <UserContext.Provider value={{ user, setUser }}>
@@ -32,16 +34,54 @@ function App() {
               <Notification />
             </div>
           </div>
-          <div className="main-content">
+          <div>
             <Routes>
               <Route
                 path="/"
-                element={loggedIn ? <LoggedInComponent /> : <LoginForm />}
+                element={
+                  loggedIn ? (
+                    <div className="main-content">
+                      <LoggedInComponent />
+                    </div>
+                  ) : (
+                    <div className="main-content-center">
+                      <LoginForm />
+                    </div>
+                  )
+                }
               />
-              <Route path="/create" element={<CreateUserForm />} />
-              <Route path="/test" element={<TestComponent />} />
-              <Route path="/account" element={<AccountComponent />} />
-              <Route path="/admin" element={<AdminComponent />} />
+              <Route
+                path="/create"
+                element={
+                  <div className="main-content-center">
+                    <CreateUserForm />
+                  </div>
+                }
+              />
+              <Route
+                path="/test"
+                element={
+                  <div className="main-content">
+                    <TestComponent />
+                  </div>
+                }
+              />
+              <Route
+                path="/account"
+                element={
+                  <div className="main-content">
+                    <AccountComponent />
+                  </div>
+                }
+              />
+              <Route
+                path="/admin"
+                element={
+                  <div className="main-content">
+                    <AdminComponent />
+                  </div>
+                }
+              />
             </Routes>
           </div>
         </div>

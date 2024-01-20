@@ -41,6 +41,46 @@ export async function getUser(token: string): Promise<any> {
   return response.json();
 }
 
+export async function deleteUser(token: string): Promise<any> {
+  const response = await fetch("http://localhost:8443/api/users/", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(errorText);
+  }
+
+  return response.text();
+}
+
+export async function updateUser(
+  token: string,
+  username: string | null,
+  password: string | null,
+  email: string | null
+): Promise<any> {
+  const response = await fetch("http://localhost:8443/api/users/", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ username, password, email }),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(errorText);
+  }
+
+  return response.text();
+}
+
 export async function createUser(
   username: string,
   password: string,

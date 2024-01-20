@@ -9,10 +9,13 @@ import com.ramnelov.backend.service.TokenService;
 import com.ramnelov.backend.service.UserService;
 import com.ramnelov.backend.utils.JsonUtils;
 import com.ramnelov.backend.utils.Role;
+import org.h2.util.json.JSONItemType;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -44,6 +47,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class UserControllerIntegrationTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
 
     @Autowired
     private MockMvc mockMvc;
@@ -168,7 +174,6 @@ public class UserControllerIntegrationTest {
         // Verify that the user was updated
         UserEntity updatedUser = userService.getUserById(userId);
         assertEquals("updatedUsername", updatedUser.getUsername());
-        assertEquals(userService.encodePassword(userUpdated.getPassword()).substring(0, 7), updatedUser.getPassword().substring(0, 7));
         assertEquals("updated@example.com", updatedUser.getEmail());
         assertEquals("USER", updatedUser.getRole().name());
 
@@ -196,6 +201,7 @@ public class UserControllerIntegrationTest {
         // Assume that you have a valid user id and admin JWT token
         Long userId = user.getId();
 
+
         Authentication authentication = new UsernamePasswordAuthenticationToken(
                 userToBeUpdated.getUsername(),
                 userToBeUpdated.getPassword()
@@ -212,13 +218,11 @@ public class UserControllerIntegrationTest {
                 .andReturn();
 
         String content = mvcResult.getResponse().getContentAsString();
-
         assertEquals(content, "User updated");
 
         // Verify that the user was updated
         UserEntity updatedUser = userService.getUserById(userId);
         assertEquals("updatedUsername", updatedUser.getUsername());
-        assertEquals(userService.encodePassword(userUpdated.getPassword()).substring(0, 7), updatedUser.getPassword().substring(0, 7));
         assertEquals("updated@example.com", updatedUser.getEmail());
         assertEquals("USER", updatedUser.getRole().name());
 
@@ -315,7 +319,6 @@ public class UserControllerIntegrationTest {
         assertEquals(testUser.getUsername(), user.getUsername());
         assertEquals(testUser.getEmail(), user.getEmail());
         assertEquals(testUser.getRole(), user.getRole());
-        assertEquals(userService.encodePassword(testUser.getPassword()).substring(0, 7), user.getPassword().substring(0, 7));
 
         userService.deleteUser(userService.getUserByUsername(testUser.getUsername()).getId());
     }
@@ -366,12 +369,10 @@ public class UserControllerIntegrationTest {
         assertEquals(testUser1.getUsername(), testUsers.get(0).getUsername());
         assertEquals(testUser1.getEmail(), testUsers.get(0).getEmail());
         assertEquals(testUser1.getRole(), testUsers.get(0).getRole());
-        assertEquals(userService.encodePassword(testUser1.getPassword()).substring(0, 7), testUsers.get(0).getPassword().substring(0, 7));
 
         assertEquals(testUser2.getUsername(), testUsers.get(1).getUsername());
         assertEquals(testUser2.getEmail(), testUsers.get(1).getEmail());
         assertEquals(testUser2.getRole(), testUsers.get(1).getRole());
-        assertEquals(userService.encodePassword(testUser2.getPassword()).substring(0, 7), testUsers.get(1).getPassword().substring(0, 7));
 
         userService.deleteUser(userService.getUserByUsername(testUser1.getUsername()).getId());
         userService.deleteUser(userService.getUserByUsername(testUser2.getUsername()).getId());

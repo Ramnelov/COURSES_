@@ -132,6 +132,10 @@ video {
   transition: all 1s;
 }
 
+main .hidden {
+  transition: opacity 1s ease-out 0.2s, transform 1s 0.2s, filter 1s 0.2s;
+}
+
 .show {
   opacity: 1;
   filter: blur(0);
